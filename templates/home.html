@@ -62,12 +62,18 @@ This happened because both paragraphs are inside the centered container, but:
 
 The About section paragraph might appear more centered due to its length and how the text wraps within the 720px max-width container. When the text wraps, it creates a visual effect that makes it appear more centered, even though it's actually left-aligned within the container.
 The TODO/Jobs section paragraph is much shorter ("TODO - Show jobs here"), so when it's left-aligned within the centered container, it's more obviously not centered on the page.
+
+BUT: We commented out all the style tag section, and in-line styling of the div tag containing the button and the copyright paragraph, becuase now we are going to use BOOTSTRAP to style our website. Bootstrap is a CSS framework that provides pre-built styles for common elements, and it's easy to use. We can use bootstrap by including it in the head tag, with the link tag.
+
+
 -->
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Jovian Careers</title>
-    <style>
+    <!-- <style>
       h1 {
         font-size: 40px;
         font-family: Roboto;
@@ -105,23 +111,23 @@ The TODO/Jobs section paragraph is much shorter ("TODO - Show jobs here"), so wh
         margin: 0 auto;
       }
       
-    </style>
+    </style> -->
   </head>
   <body>
-    <div id="container">
+    <div <!--id="container"-->>
     <h1>Jovian Careers</h1>
     Hello  there, you'll learn about the job openings at Jovian here!
     <img id="banner" src="https://0066abca-af17-48e5-baf4-f9dc6becce77-00-8cc8lehjnc0r.picard.replit.dev/static/banner.jpg"
       width="320px" height="360">
     <h2>About Jovian</h2>
-    <p class="bodytext">Jovian is a company that provides job openings for people who want to learn and grow in their careers. We have a variety of job openings in different fields, and we are always looking for new talent to join our team.</p>
+    <p <!-- class="bodytext"-->>Jovian is a company that provides job openings for people who want to learn and grow in their careers. We have a variety of job openings in different fields, and we are always looking for new talent to join our team.</p>
   
   
   <h2>Open Positions</h2>
       
-  <p class="bodytext">TODO - Show jobs here</p>
+  <p <!-- class="bodytext"-->>TODO - Show jobs here</p>
       
-      <div style= "text-align:center;">
+      <div <!-- style= "text-align:center;"-->>
   <button>Contact Us</button>
         <p>
          Copyright 2022 Jovian 
