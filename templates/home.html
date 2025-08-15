@@ -1,0 +1,132 @@
+<!-- In the home html file 
+we will put the info we want to show on the page that is being rendered with route "/" in our web app. 
+You need to declare the type of document on top of the file, with the header DOCTYPE and then you can write html code.
+In HTML everything is inside a tag, so you need to have a tag html and inside of it you can have other tags. The root or outmost tag is html.
+The main tags are head and body, head is for the metadata and body is for the content of the page. Head information is shown in the browser tab and body information is shown in the browser window.
+
+We generally put styling declarations and CSS files in the head tag, same goes for JS libraries, and the content of the page in the body tag.
+
+The head contains information used to render something in the  body, the body is the actual information that is being rendered. In the head a title tag is used to set the title of the page.
+
+So wee created this home.html file in a templates folder, 
+but in order to use it, we need the render_template function from flask, which will render the html file in the templates folder.
+
+excalidraw.com is a good tool to draw diagrams and flowcharts, for a general initial design of your web page, basically a wireframe.
+
+There are six levels of headers in html, from h1 to h6, h1 is the most important and h6 is the least important.
+
+We can add images with the img tag, and we can add links with the a tag. img is a self-closing tag, it doesn't have a closing tag, it's just one tag. a is not a self-closing tag, it has a closing tag. You justgive it a source with the src attribute or a link with the href attribute.
+
+One good place to find images for your website is unsplash.com, you can search for images and download them for free. You can also use the image url directly in the src attribute. 
+
+Images are usually put in a folder called static, and then you can reference them in the src attribute with the path to the image.
+
+You can access the images in the static folder by typing in the browser yourdomain.com/static/imagename.jpg
+Everything you put in the static folder is called asset.
+
+height and width attributes are measured in pixels, and you can set them to a fixed number or to a percentage of the screen size. You can omit the "px" and just write the number, it will be assumed to be pixels.
+
+p tag is for paragraphs, and br tag is for line breaks. You can use br tag to create a line break inside a paragraph.
+
+To use CSS we implement the tag style in the head tag, and then we can write CSS code inside it. CSS is a language that is used to style html elements. Then inside the style tag, you can write the style of the other html tags that you want to style, with the syntax tagname { property: value; }
+
+The property font-weight is used to set the weight of the font, it can be normal, bold, bolder, lighter, or a number between 100 and 900. The property font-size is used to set the size of the font.
+
+You can set the color property to a color name, a hex code, or an rgb code. You can also set the color property to a variable, and then set the variable to a color. For example, you can set the variable --primary-color to a color, and then set the color property to var(--primary-color).
+
+The rgb scale goes from 0 to 255, and it's used to set the red, green, and blue components of a color. You can set the color property to an rgb code, and then set the red, green, and blue components, from left to right. For example, rgb(255,0,0) is red, rgb(0,255,0) is green, and rgb(0,0,255) is blue. 0 value being the least amount of that color and 255 being the most. If you have equal values for red, green and blue, you get a shade of gray, from black to white.
+
+The text-align property is used to set the alignment of the text, it can be left, right, center, or justify.
+
+Another way to select an element is by using the id attribute, and then using the # symbol in the CSS selector. The id attribute is used to uniquely identify an element, and it's used to select an element with CSS. You can only use one id per element.
+
+You can also select an element by using the class attribute, and then using the . symbol in the CSS selector. The class attribute is used to group elements, and it's used to select elements with CSS. You can use multiple classes per element. For example, you can use the class attribute to group all the buttons in a page, and then use the . symbol in the CSS selector to select all the buttons.
+
+If a picture is too stretched, you can un-stretch it by setting the object-fit property to cover, and then setting the width or height to 100%. This will make the picture cover the entire container, and it will not be stretched. If you set both width and height to 100%, the picture will be stretched to fit the container, but it will not be stretched in one direction only.
+
+In order to enhance the website readability, we enclose all the content in the body in a div tag, and then we can use the margin property to set the margin of the div. The margin property is used to set the space outside the element, and it can be set to a fixed number or to a percentage. We set the max-width property to 720px, so that the content is not too wide, and it's easy to read.
+
+We centered the text of all the body by setting property margin-left, but what if the screen size changes? Suddenly is not centered anymore. So we use margin: 0 auto 0 auto; to center the text. The first 0 is the top margin, the second 0 the bottom margin, and the two 80px are the left and right margins. The auto keyword is used to set the left and right margins to the same value, so that the element is centered.
+
+This is the CSS box model, it's a way to think about the space around an element. The box model has four parts: content, padding, border, and margin. The content is the actual content of the element, the padding is the space inside the element, the border is the border of the element, and the margin is the space outside the element.
+
+The contact us button was not getting centered, so we applied the style in-line to the div tag, and then we set the text-align property to center. This is not the best way to do it, because it's not reusable. The best way to do it is to create a class, and then use the class.
+
+So you can style an html element by calling it by its tag name, by its id, or modifying it in-line, or by calling it by its class. The best way to do it is to create a class, and then use the class. This is the most reusable way to do it. We separated the style of the two different paragraphs by including them in the same class.
+
+We used class to style two paragraphs, but personalizing the copyright paragraph with in-line styling, so we can see the difference between the two ways of styling, and have more granular control over the styling of the copyright paragraph.
+
+Interesting phenomenon: the About section paragraph was getting centered by just setting "margin: 0 auto;" in the container div id, but the TODO/Jobs section paragraph was not getting centered even if it was part of container, so we had to set "text-align: center;" in the .bodytext class.
+
+This happened because both paragraphs are inside the centered container, but:
+
+The About section paragraph might appear more centered due to its length and how the text wraps within the 720px max-width container. When the text wraps, it creates a visual effect that makes it appear more centered, even though it's actually left-aligned within the container.
+The TODO/Jobs section paragraph is much shorter ("TODO - Show jobs here"), so when it's left-aligned within the centered container, it's more obviously not centered on the page.
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Jovian Careers</title>
+    <style>
+      h1 {
+        font-size: 40px;
+        font-family: Roboto;
+        font-weight: normal;
+        color: rgb(255,0,0);
+        text-align: center;
+      }
+      #banner {
+        width: 100%;
+        height: 360px;
+        object-fit: cover;
+      }
+      h2 {
+        font-family: Roboto;
+        font-size: 32px;
+        color: rgb(100,100,100);
+        text-align: center;
+        font-weight: normal;
+      }
+      /*p {
+        font-family: Roboto;
+        color: rgb(80,80,80);
+      }*/
+      .bodytext {
+        font-family: Roboto;
+        color: rgb(80,80,80);
+        /*margin: 0 auto;*/
+        text-align: center;
+      }
+      #container {
+        max-width: 720px;
+        /*margin-left: 350px;*/
+        /*margin: 0 auto 0 auto;
+        equivalent to*/
+        margin: 0 auto;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div id="container">
+    <h1>Jovian Careers</h1>
+    Hello  there, you'll learn about the job openings at Jovian here!
+    <img id="banner" src="https://0066abca-af17-48e5-baf4-f9dc6becce77-00-8cc8lehjnc0r.picard.replit.dev/static/banner.jpg"
+      width="320px" height="360">
+    <h2>About Jovian</h2>
+    <p class="bodytext">Jovian is a company that provides job openings for people who want to learn and grow in their careers. We have a variety of job openings in different fields, and we are always looking for new talent to join our team.</p>
+  
+  
+  <h2>Open Positions</h2>
+      
+  <p class="bodytext">TODO - Show jobs here</p>
+      
+      <div style= "text-align:center;">
+  <button>Contact Us</button>
+        <p>
+         Copyright 2022 Jovian 
+        </p>
+      </div>
+  </div>
+  </body>
+</html>

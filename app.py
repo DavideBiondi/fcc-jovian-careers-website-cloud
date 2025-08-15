@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 
 #An App is an object of Flask class. It is our WSGI application. WSGI stands for Web Server Gateway Interface.
 #In any python script, you have this variable __name__ which is a built-in variable.
@@ -13,7 +13,8 @@ The symbol '@' is a decorator. A decorator is a design pattern in Python that al
 @app.route("/")
 #The "/" is the root URL. The root URL is the URL of the home page of a website.
 def hello_world():
-    return "<p>Hello, World!</p>"
+    #return "<p>Hello, World!</p>"
+    return render_template('home.html')
 print(__name__)
 """Instead of using flusk run command, we can use app.run command to run the application:"""
 if __name__ == '__main__':
