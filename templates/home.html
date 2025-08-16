@@ -63,15 +63,47 @@ This happened because both paragraphs are inside the centered container, but:
 The About section paragraph might appear more centered due to its length and how the text wraps within the 720px max-width container. When the text wraps, it creates a visual effect that makes it appear more centered, even though it's actually left-aligned within the container.
 The TODO/Jobs section paragraph is much shorter ("TODO - Show jobs here"), so when it's left-aligned within the centered container, it's more obviously not centered on the page.
 
-BUT: We commented out all the style tag section, and in-line styling of the div tag containing the button and the copyright paragraph, becuase now we are going to use BOOTSTRAP to style our website. Bootstrap is a CSS framework that provides pre-built styles for common elements, and it's easy to use. We can use bootstrap by including it in the head tag, with the link tag.
+BUT: We commented out all the style tag section, and tag containing in-line styling of the div tag containing the button and the copyright paragraph, because now we are going to use BOOTSTRAP to style our website. Bootstrap is a CSS framework that provides pre-built styles for common elements, and it's easy to use. We can use bootstrap by including it in the head tag, with the link tag.
 
+We copied two meta tags from the bootstrap website, and pasted them in the head tag. The first meta tag is used to set the character encoding, and the second meta tag is used to set the viewport. The viewport is the area of the screen that is visible.
 
+Then we included the CSS file from bootstrap in the head tag, with the link tag. We copied the link tag from the bootstrap website, and pasted it in the head tag. 
+
+There are a lot of styles in bootstrap, and we can use them by adding classes to our html elements. For example, we can use the class btn to make a button look like a button, and we can use the class btn-primary to make it look like a primary button. We can also use the class btn-lg to make it look like a large button.
+
+Bootstrap has a container class, that is used to center the content, and it has a max-width of 1140px. We can use the container class to center the content, and it will be responsive, meaning that it will adjust to the size of the screen.
+
+The image caused alignment issues, so we used the class img-fluid to make it responsive, and it will adjust to the size of the container.
+
+Besides these automations, we can still make our own styling, for example just under the link tag, we preserved the id banner style to make the image cover the entire container. This allows to have more granularity and control over the styling of the website. 
+
+Considering that we have a lot of elements whose text we want to center, we can apply multiple CSS classes to a single element, by putting them all in one class attribute, separated by spaces, so in the biggest div tag we put both classes container and text-center.
+
+In order to make one paragraph (the About paragraph) stand out more than the others, we can use the class lead, which is a bootstrap class that makes the text bigger and bolder.
+
+In order to make some spacing between the main header and the subsequent paragraph, we can use the class mt-3, which is a bootstrap class that adds margin-top, and the class mb-3, which is a bootstrap class that adds margin-bottom. The number after the dash is the size of the margin, and it can be 0, 1, 2, 3, 4, 5, or auto. The number is multiplied by 0.25rem, so mt-3 is 0.75rem of margin-top.
+
+The syntax is {property}{sides}-{size} for xs and {property}{sides}-{breakpoint}-{size} for sm, md, lg, xl, and xxl. For example, m is for margin, t is for top, x is for left and right, l is for left, r is for right, b is for bottom, y is for top and bottom, blank is for all four sides, e is for end (right in LTR, left in RTL), s is for start (left in LTR, right in RTL).
+
+So xs means extra small, sm means small, md means medium, lg means large, xl means extra large, and xxl means extra extra large. The breakpoints are 576px, 768px, 992px, and 1200px. The default breakpoint is 0px.
+
+{property (m or p)}{sides (t, b, l, r, x, y, blank, s, e)}{breakpoint (sm, md, lg, xl, xxl)}{size (0, 1, 2,)}.
+
+Regarding the button, we used the class btn to make it look like a button, and we can use the class btn-primary to make it look like a primary button. We can also use the class btn-lg to make it look like a large button. We also used the class mb-3 to add margin-bottom.
 -->
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <style>
+      #banner {
+        height: 360px;
+        width: 100%;
+        object-fit: cover;
+      }
+    </style>
     <title>Jovian Careers</title>
     <!-- <style>
       h1 {
@@ -114,21 +146,28 @@ BUT: We commented out all the style tag section, and in-line styling of the div 
     </style> -->
   </head>
   <body>
-    <div <!--id="container"-->>
-    <h1>Jovian Careers</h1>
-    Hello  there, you'll learn about the job openings at Jovian here!
-    <img id="banner" src="https://0066abca-af17-48e5-baf4-f9dc6becce77-00-8cc8lehjnc0r.picard.replit.dev/static/banner.jpg"
-      width="320px" height="360">
-    <h2>About Jovian</h2>
-    <p <!-- class="bodytext"-->>Jovian is a company that provides job openings for people who want to learn and grow in their careers. We have a variety of job openings in different fields, and we are always looking for new talent to join our team.</p>
+    <!--<div id="container">-->
+    <div class="container text-center">
+    <h1 class="mt-3 mb-3">Jovian Careers</h1>
+    <p>Hello  there, you'll learn about the job openings at Jovian here!</p>
+    <!-- <img id="banner" src="https://0066abca-af17-48e5-baf4-f9dc6becce77-00-8cc8lehjnc0r.picard.replit.dev/static/banner.jpg"
+      width="320px" height="360"> -->
+      <img class="img-fluid" id="banner" src="https://0066abca-af17-48e5-baf4-f9dc6becce77-00-8cc8lehjnc0r.picard.replit.dev/static/banner.jpg"
+        width="320px" height="360">
+    <h2 class="mt-3">About Jovian</h2>
+      <!-- <p class="bodytext">-->
+      <p class="lead">
+      Jovian is a company that provides job openings for people who want to learn and grow in their careers. We have a variety of job openings in different fields, and we are always looking for new talent to join our team.</p>
   
   
-  <h2>Open Positions</h2>
+  <h2 class="mb-3">Open Positions</h2>
       
-  <p <!-- class="bodytext"-->>TODO - Show jobs here</p>
+      <!-- <p class="bodytext">-->
+      <p>TODO - Show jobs here</p>
       
-      <div <!-- style= "text-align:center;"-->>
-  <button>Contact Us</button>
+      <!-- <div style= "text-align:center;">-->
+      <div>
+  <button class="mb-3 btn btn-primary btn-lg">Contact Us</button>
         <p>
          Copyright 2022 Jovian 
         </p>
