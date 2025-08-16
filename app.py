@@ -28,7 +28,7 @@ In order to differentiate between the two, often a route starting with /api is u
 
 API stands for Application Programming Interface. It is a set of rules and protocols that allows different software applications to communicate with each other. ABI stands for Application Binary Interface. The difference between API and ABI is that API is a set of rules and protocols that allows different software applications to communicate with each other, while ABI is a set of rules and protocols that allows different software applications to communicate with each other at the binary level.
 
-
+In this context, microservices are small, independent services that communicate with each other using APIs. They are small, independent services that can be developed, deployed, and scaled independently. They are not monolithic applications. Monolithic applications are large, single applications that do everything
 """
 
 JOBS = [

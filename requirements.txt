@@ -1,0 +1,10 @@
+#this file is a standard in the python ecosystem
+#so that anytime you have a python project and you need 
+#to specify that Render, or another environment requires
+#certain libraries to run the project, it's a convention to    #put that information inside a requirements.txt file.
+#we also changed in Render the build command from:
+#uv sync --frozen && uv cache prune --ci
+#to:
+#pip install -r requirements.txt
+Flask
+gunicorn
