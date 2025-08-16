@@ -91,7 +91,19 @@ So xs means extra small, sm means small, md means medium, lg means large, xl mea
 
 Regarding the button, we used the class btn to make it look like a button, and we can use the class btn-primary to make it look like a primary button. We can also use the class btn-lg to make it look like a large button. We also used the class mb-3 to add margin-bottom.
 
-We used flask special templating syntax to insert dynamic data into our HTML file, by using double curly braces {{}}, so the python list of dictionaries is rendered as a string in the web page.
+We used flask special templating syntax to insert dynamic data into our HTML file, by using double curly braces {\{\}}, so the python list of dictionaries is rendered as a string in the web page.
+
+The double curly braces syntax must be escaped in comments, in order to avoid a jinja2.exceptions.TemplateSyntaxError.
+
+That is the true meaning of dynamic web pages, they are not static, they are generated on the fly, and they can change based on the data that is passed to them, via these special Flask templating syntax.
+
+In order to render the jobs in a more structured way, we created a new file called jobitem.html, and we used the include directive to include it in the home.html file. The include directive is used to include another file in the current file. The include directive is used to include a file that contains HTML code, and it's used to include a file that contains CSS code. 
+
+We used some in-line styling to make the job items look better, because it was faster than creating classes or using Bootstrap ones. The styling of this dynamic elements also included for loop syntax, which is used to iterate over a list of dictionaries, which is basically our JSON data. And we also used control statements, like if statements, to check if a key exists in a dictionary. When it doesn't, it is simply not rendered.
+
+We also used bootstrap class border-bottom to place a border between the job items, and we used the class border-success to make the border green, and we used the class border-3 to make the border 3 pixels thick. And we spaced theborders 16px from the bottom of the job items, by using the style attribute and the padding-bottom property.
+
+We organized the job items in a row, by using the class row, and we used the class col-9 to make the job items take up 9 out of 12 columns, and we used the class col-3 to make the Apply button take up 3 out of 12 columns. We used the class align-self-center to make the button align itself to the center of the row. btn-outline-light btn-success classes added a fancy transition effect to the button.
 -->
 <!DOCTYPE html>
 <html>
@@ -150,7 +162,7 @@ We used flask special templating syntax to insert dynamic data into our HTML fil
   <body>
     <!--<div id="container">-->
     <div class="container text-center">
-    <h1 class="mt-3 mb-3">Jovian Careers</h1>
+    <h1 class="mt-3 mb-3">{{company_name}} Careers</h1>
     <p>Hello  there, you'll learn about the job openings at Jovian here!</p>
     <!-- <img id="banner" src="https://0066abca-af17-48e5-baf4-f9dc6becce77-00-8cc8lehjnc0r.picard.replit.dev/static/banner.jpg"
       width="320px" height="360"> -->
@@ -168,9 +180,26 @@ We used flask special templating syntax to insert dynamic data into our HTML fil
       <!-- <p>TODO - Show jobs here</p> -->
       <!-- The following is called templating syntax
       and it is provided by Flask, not HTML or CSS, and         it is used to insert dynamic data into our HTML           file and CSS-->
-      <p>  
-      {{jobs}}
-      </p>
+      
+      <!-- <p>{{jobs}}</p> -->
+
+      <div>
+        {% for job in jobs %}
+        <!-- <div style="margin-bottom: 16px;">
+          <h4 style="color: rgb(120,120,120); margin-bottom:4px;"> {{job['title']}}
+          </h4>
+          <div><b>Location: </b>{{job['location']}}</div>
+          <div>
+            {% if 'salary' in job %}
+            <div><b>Salary: </b>{{job['salary']}}</div>
+            {% endif %}
+          </div>
+
+        </div> -->
+        <!-- Equivalent to: -->
+        {% include 'jobitem.html' %}
+        {% endfor %}
+      </div>
       
       <!-- <div style= "text-align:center;">-->
       <div>
