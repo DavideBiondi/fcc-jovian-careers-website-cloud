@@ -90,6 +90,8 @@ So xs means extra small, sm means small, md means medium, lg means large, xl mea
 {property (m or p)}{sides (t, b, l, r, x, y, blank, s, e)}{breakpoint (sm, md, lg, xl, xxl)}{size (0, 1, 2,)}.
 
 Regarding the button, we used the class btn to make it look like a button, and we can use the class btn-primary to make it look like a primary button. We can also use the class btn-lg to make it look like a large button. We also used the class mb-3 to add margin-bottom.
+
+We used flask special templating syntax to insert dynamic data into our HTML file, by using double curly braces {{}}, so the python list of dictionaries is rendered as a string in the web page.
 -->
 <!DOCTYPE html>
 <html>
@@ -163,7 +165,12 @@ Regarding the button, we used the class btn to make it look like a button, and w
   <h2 class="mb-3">Open Positions</h2>
       
       <!-- <p class="bodytext">-->
-      <p>TODO - Show jobs here</p>
+      <!-- <p>TODO - Show jobs here</p> -->
+      <!-- The following is called templating syntax
+      and it is provided by Flask, not HTML or CSS, and         it is used to insert dynamic data into our HTML           file and CSS-->
+      <p>  
+      {{jobs}}
+      </p>
       
       <!-- <div style= "text-align:center;">-->
       <div>

@@ -10,11 +10,44 @@ We tell Flask when a certain URL is requested, the function is called and the re
 And the domain name is www.example.com.
 
 The symbol '@' is a decorator. A decorator is a design pattern in Python that allows a user to add new functionality to an existing object without modifying its structure. Decorators are usually called before the definition of a function you want to decorate."""
+
+"""It is not a good practice to list all the jobs in the HTML file. Instead, we should list them in the python file and then pass them to the HTML file. And then is sent to the browser as a response we can see on the screen.
+So we simulated a database with a list of dictionaries. Each dictionary represents a job. And then we pass this list to the HTML file. And then we can use this list in the HTML file.
+"""
+
+JOBS = [
+    {
+        'id': 1,
+        'title': 'Data Analyst',
+        'location': 'Bengaluru, India',
+        'salary': 'Rs. 10,00,000'
+    },
+    {
+        'id': 2,
+        'title': 'Data Scientist',
+        'location': 'Delhi, India',
+        'salary': 'Rs. 15,00,000'
+    },
+    {
+        'id': 3,
+        'title': 'Frontend engineer',
+        'location': 'Remote',
+        'salary': 'Rs. 12,00,000'
+    },
+    {
+        'id': 4,
+        'title': 'Backend engineer',
+        'location': 'San Francisco, USA',
+        'salary': '$ 120,000'
+    }
+]
+
 @app.route("/")
 #The "/" is the root URL. The root URL is the URL of the home page of a website.
 def hello_world():
     #return "<p>Hello, World!</p>"
-    return render_template('home.html')
+    #We send the list of jobs to the HTML file by passing JOBS as an argument to the render_template function. The argument is JOBS but the parameter name could have been anything.
+    return render_template('home.html', jobs=JOBS)
 print(__name__)
 """Instead of using flusk run command, we can use app.run command to run the application:"""
 if __name__ == '__main__':
