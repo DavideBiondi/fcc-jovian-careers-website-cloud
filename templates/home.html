@@ -104,6 +104,10 @@ We used some in-line styling to make the job items look better, because it was f
 We also used bootstrap class border-bottom to place a border between the job items, and we used the class border-success to make the border green, and we used the class border-3 to make the border 3 pixels thick. And we spaced theborders 16px from the bottom of the job items, by using the style attribute and the padding-bottom property.
 
 We organized the job items in a row, by using the class row, and we used the class col-9 to make the job items take up 9 out of 12 columns, and we used the class col-3 to make the Apply button take up 3 out of 12 columns. We used the class align-self-center to make the button align itself to the center of the row. btn-outline-light btn-success classes added a fancy transition effect to the button.
+
+We added a very basic navigation bar, by using the class navbar and the class navbar-light and the class shadow-sm and the class fixed-top and the class bg-white. We also added a logo to the navigation bar, by using the class navbar. navbar-light for use with light background colors. shadow-sm for a small shadow. fixed-top for a fixed position at the top of the page, so that it does not slip away when scrolling the website. bg-white is used to avoid the content of the website overlapping the navigation bar. The container-fluid class is used to make the navigation bar take up the entire width of the screen. Then, to avoid the navbar covering the page title, we introduced a void div with height 56px, which is the height of the navbar.
+
+TODO: Finish to comment the part 1.6 of this tutorial: "Functional and aesthetic improvements"
 -->
 <!DOCTYPE html>
 <html>
@@ -116,6 +120,7 @@ We organized the job items in a row, by using the class row, and we used the cla
         height: 360px;
         width: 100%;
         object-fit: cover;
+        margin-bottom: 16px;
       }
     </style>
     <title>Jovian Careers</title>
@@ -160,21 +165,33 @@ We organized the job items in a row, by using the class row, and we used the cla
     </style> -->
   </head>
   <body>
+    {% include 'nav.html' %}
     <!--<div id="container">-->
+    <img class="img-fluid" id="banner" src="https://0066abca-af17-48e5-baf4-f9dc6becce77-00-8cc8lehjnc0r.picard.replit.dev/static/banner.jpg"
+      >
     <div class="container text-center">
     <h1 class="mt-3 mb-3">{{company_name}} Careers</h1>
     <p>Hello  there, you'll learn about the job openings at Jovian here!</p>
     <!-- <img id="banner" src="https://0066abca-af17-48e5-baf4-f9dc6becce77-00-8cc8lehjnc0r.picard.replit.dev/static/banner.jpg"
       width="320px" height="360"> -->
-      <img class="img-fluid" id="banner" src="https://0066abca-af17-48e5-baf4-f9dc6becce77-00-8cc8lehjnc0r.picard.replit.dev/static/banner.jpg"
-        width="320px" height="360">
-    <h2 class="mt-3">About Jovian</h2>
+      
+      <!--<img class="img-fluid" id="banner" src="https://0066abca-af17-48e5-baf4-f9dc6becce77-00-8cc8lehjnc0r.picard.replit.dev/static/banner.jpg"
+        width="320px" height="360">-->
+    
+      <h2 class="mt-3 mb-3">About Jovian</h2>
       <!-- <p class="bodytext">-->
+      <div class="row">
+        <div class="col-md-6">
       <p class="lead">
       Jovian is a company that provides job openings for people who want to learn and grow in their careers. We have a variety of job openings in different fields, and we are always looking for new talent to join our team.</p>
+        </div>
+        <div class="d-none d-md-block col-md-6">
+        <img src="static/people.jpg" 
+          style="height:320px; border-radius:4px;"
+          </div>
+      </div>
   
-  
-  <h2 class="mb-3">Open Positions</h2>
+  <h2 class="mb-3 mt-3">Open Positions</h2>
       
       <!-- <p class="bodytext">-->
       <!-- <p>TODO - Show jobs here</p> -->
@@ -203,11 +220,13 @@ We organized the job items in a row, by using the class row, and we used the cla
       
       <!-- <div style= "text-align:center;">-->
       <div>
-  <button class="mb-3 btn btn-primary btn-lg">Contact Us</button>
-        <p>
+        <a href="mailto:hello@jovian.ai?subject=Question%20about%20Job%20Openings&body=My%20name%3A%20%3Cyour%20name%20here%3E%0D%0A%0D%0AMy%20question%3A%20%3Center%20question%20here%3E" class="mt-3 mb-1 btn btn-primary btn-lg">Contact Us</a>
+   <!-- <button class="mt-3 mb-1 btn btn-primary btn-lg">Contact Us</button> -->
+        <!--<p>
          Copyright 2022 Jovian 
-        </p>
+        </p> -->
       </div>
   </div>
+    {% include 'footer.html' %}
   </body>
 </html>
