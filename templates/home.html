@@ -91,7 +91,7 @@ So xs means extra small, sm means small, md means medium, lg means large, xl mea
 
 Regarding the button, we used the class btn to make it look like a button, and we can use the class btn-primary to make it look like a primary button. We can also use the class btn-lg to make it look like a large button. We also used the class mb-3 to add margin-bottom.
 
-We used flask special templating syntax to insert dynamic data into our HTML file, by using double curly braces {\{\}}, so the python list of dictionaries is rendered as a string in the web page.
+We used flask special templating syntax to insert dynamic data into our HTML file, by using double curly braces {\{\}}, so the python list of dictionaries is rendered as a string in the web page. It is important to note that the tokens inside the double curly braces are actually parameters names, that are passed to the render_template function in app.py, and render_template function must have this very html file as first parameter, if you want to inject in it the parameters that you pass to it.
 
 The double curly braces syntax must be escaped in comments, in order to avoid a jinja2.exceptions.TemplateSyntaxError.
 
@@ -167,8 +167,7 @@ TODO: Finish to comment the part 1.6 of this tutorial: "Functional and aesthetic
   <body>
     {% include 'nav.html' %}
     <!--<div id="container">-->
-    <img class="img-fluid" id="banner" src="https://0066abca-af17-48e5-baf4-f9dc6becce77-00-8cc8lehjnc0r.picard.replit.dev/static/banner.jpg"
-      >
+    <img class="img-fluid" id="banner" src="https://4b7dc35b-0000-4c60-a677-32ac7d132a16-00-1wiomotivyk1t.worf.replit.dev/static/banner.jpg">
     <div class="container text-center">
     <h1 class="mt-3 mb-3">{{company_name}} Careers</h1>
     <p>Hello  there, you'll learn about the job openings at Jovian here!</p>
@@ -194,7 +193,7 @@ TODO: Finish to comment the part 1.6 of this tutorial: "Functional and aesthetic
   <h2 class="mb-3 mt-3">Open Positions</h2>
       
       <!-- <p class="bodytext">-->
-      <!-- <p>TODO - Show jobs here</p> -->
+      <!-- <p>Show jobs here</p> -->
       <!-- The following is called templating syntax
       and it is provided by Flask, not HTML or CSS, and         it is used to insert dynamic data into our HTML           file and CSS-->
       

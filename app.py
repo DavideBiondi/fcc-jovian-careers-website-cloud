@@ -1,5 +1,7 @@
 from flask import Flask, render_template, jsonify
-
+#from database import engine
+#from sqlalchemy import text
+from database import load_jobs_from_db
 #An App is an object of Flask class. It is our WSGI application. WSGI stands for Web Server Gateway Interface.
 #In any python script, you have this variable __name__ which is a built-in variable.
 """this variable refers to how a particular script was invoked. In this case the script was invoked as the main script. That's why __main__ is the value of __name__ variable."""
@@ -28,9 +30,25 @@ In order to differentiate between the two, often a route starting with /api is u
 
 API stands for Application Programming Interface. It is a set of rules and protocols that allows different software applications to communicate with each other. ABI stands for Application Binary Interface. The difference between API and ABI is that API is a set of rules and protocols that allows different software applications to communicate with each other, while ABI is a set of rules and protocols that allows different software applications to communicate with each other at the binary level.
 
-In this context, microservices are small, independent services that communicate with each other using APIs. They are small, independent services that can be developed, deployed, and scaled independently. They are not monolithic applications. Monolithic applications are large, single applications that do everything
+In this context, microservices are small, independent services that communicate with each other using APIs. They are small, independent services that can be developed, deployed, and scaled independently. They are not monolithic applications. Monolithic applications are large, single applications that do everything.
+
+We also imported text from sqlalchemy to be able to use the text function to execute raw SQL queries. engine.connet() is used to create a connection to the database. The connection is used to execute SQL queries. The connection is closed after the queries are executed.
+
+We imported engine from database.py to be able to use the engine object to create a connection to the database. We used the text function to execute raw SQL queries. This is another syntax to import .py files, it is called relative import. It is used to import modules from the same package. In this case, we are importing engine from database.py. 
+
+So we used the engine to create a "result" object which is a CursorResult object, from which we obtain the "rows" object wich is basically a list of RowMapping objects, and then we convert it to "jobs" object, which is a list of dictionaries. 
+
+We replaced the JSON object JOBS with the database object jobs,which is a list of dictionaries, JOBS was an hardcoded
+list of dictionaries, while jobs is a list of dictionaries obtained in a dynamic way, from a cloud-based database.
+
+The helper function load_jobs_from_db() is used to load the jobs from the database. But we moved it to database.py, so that routes and helper functions are separated. The app.py file is only used to define routes. The database.py file is used to define helper functions.
+
+With the line "from database import load_jobs_from_db" is like we are proxy importing text from sqlalchemy and engine from database.py, so we can use them in app.py, because both are used in load_jobs_from_db() function. This is good encapsulation, and good coding practice. All your database-related logic should be in database.py, and all your route-related logic should be in app.py.
+
+We also changed the route /jobs to /api/jobs, so that it is clear that it is a JSON endpoint.
 """
 
+"""
 JOBS = [
     {
         'id': 1,
@@ -62,21 +80,37 @@ JOBS = [
         'location': 'Chicago, USA'
     }
 ]
+"""
+
+"""
+def load_jobs_from_db():
+    with engine.connect() as conn:
+        result = conn.execute(text("select * from jobs"))
+        rows = result.mappings().all()
+        jobs = [dict(row) for row in rows]
+        return jobs
+"""
 
 @app.route("/")
 #The "/" is the root URL. The root URL is the URL of the home page of a website.
 #def hello_world():
 def hello_jovian():
+    jobs = load_jobs_from_db()
     #return "<p>Hello, World!</p>"
-    #We send the list of jobs to the HTML file by passing JOBS as an argument to the render_template function. The argument is JOBS but the parameter name could have been anything.
-    return render_template('home.html', jobs=JOBS, company_name='Jovian')
+    #We send the list of jobs to the HTML file by passing JOBS     as an argument to the render_template function. The            argument is JOBS but the parameter name could have been        anything.
+    """return render_template('home.html', jobs=JOBS,                 company_name='Jovian')"""
+    #We replacd the JSON object JOBS with the database object      jobs,which is a list of dictionaries.
+    return render_template('home.html', jobs=jobs,                 company_name='Jovian')
+
 print(__name__)
 
-@app.route("/jobs")
+@app.route("/api/jobs")
 def list_jobs():
-    return jsonify(JOBS)
+    #return jsonify(JOBS)
+    jobs = load_jobs_from_db()
+    return jsonify(jobs)
     
-"""Instead of using flusk run command, we can use app.run command to run the application:"""
+"""Instead of using flask run command, we can use app.run command to run the application:"""
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
     #print("I am inside the if now") 
