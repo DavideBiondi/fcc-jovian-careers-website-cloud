@@ -1,7 +1,7 @@
 from flask import Flask, render_template, jsonify
 #from database import engine
 #from sqlalchemy import text
-from database import load_jobs_from_db
+from database import load_jobs_from_db, load_job_from_db
 #An App is an object of Flask class. It is our WSGI application. WSGI stands for Web Server Gateway Interface.
 #In any python script, you have this variable __name__ which is a built-in variable.
 """this variable refers to how a particular script was invoked. In this case the script was invoked as the main script. That's why __main__ is the value of __name__ variable."""
@@ -90,6 +90,12 @@ def load_jobs_from_db():
         jobs = [dict(row) for row in rows]
         return jobs
 """
+
+@app.route("/jobs/<id>")
+def show_job(id):
+    job = load_job_from_db(id)
+    return jsonify(job)
+    #return jsonify(jobs[int(id)-1])
 
 @app.route("/")
 #The "/" is the root URL. The root URL is the URL of the home page of a website.

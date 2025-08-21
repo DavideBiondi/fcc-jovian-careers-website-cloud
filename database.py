@@ -83,7 +83,20 @@ def load_jobs_from_db():
       jobs = [dict(row) for row in rows]
       return jobs
 
+
+def load_job_from_db(id):
+  with engine.connect() as conn:
+      result = conn.execute(
+        text("SELECT * FROM jobs WHERE id = :val"), val=id)
+      rows = result.mappings().all()
+      jobs = [dict(row) for row in rows]
+      if len(rows)!=0 :
+        return jobs
+        
+
+
 print(sqlalchemy.__version__)
+
 db_connection_string = os.environ['DB_CONNECTION_STRING']
 engine = create_engine(db_connection_string,
                        connect_args={
