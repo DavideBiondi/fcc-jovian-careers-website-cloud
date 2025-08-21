@@ -66,6 +66,16 @@ The big problem we have with this file, database.py, is that it contains sensiti
 And by using urlparse() function from urllib.parse module, we can parse the secret AIVEN connection string and extract the host, port, user, password, and database name. So now we can connect safely to the database by using both sqlalchemy and pymysql libraries.
 
 TODO: Solve the mystery of the SSL certificate. Aivencloud documentation says that we need to use a SSL certificate to connect to the database, but it seems that we don't need it. We need to investigate this issue.
+
+load_job_from_db(id) is a function that takes an id as an argument and returns a single job from the database. The function uses the text function to execute raw SQL queries. The function uses the engine object to create a connection to the database. :val is the syntax to use a parameter in a raw SQL query. STRANGE: text("SELECT * FROM jobs WHERE id = :val"), {"val": id}) works, but text("SELECT * FROM jobs WHERE id = :val"), val=id) returns an error :
+"No overloads for "execute" match the provided arguments Argument types: (TextClause, Unknown)". As a matter of fact it accepts a second parameter, but in the form of a dictionary, not a single variable.
+
+In documentation, the signature of the method is:
+method sqlalchemy.engine.Connection.execute(statement: Executable, parameters: _CoreAnyExecuteParams | None = None, *, execution_options: CoreExecuteOptionsParameter | None = None) -> CursorResult[Any] 
+
+parameters: parameters which will be bound into the statement. This may be either a dictionary of parameter names to values, or a mutable sequence (e.g. a list) of dictionaries. When a list of dictionaries is passed, the underlying statement execution will make use of the DBAPI cursor.executemany() method. When a single dictionary is passed, the DBAPI cursor.execute() method will be used.
+
+The benefit of having a database which is separated from the code because the code is deployed (on render) independently from the database, the database can be changed and data just changes independently from the code. So we can have a database which is used by multiple applications, at the same time, and the data is shared between them.
 """
 
 import sqlalchemy
@@ -87,12 +97,13 @@ def load_jobs_from_db():
 def load_job_from_db(id):
   with engine.connect() as conn:
       result = conn.execute(
-        text("SELECT * FROM jobs WHERE id = :val"), val=id)
+        text("SELECT * FROM jobs WHERE id = :val"), {"val":            id})
       rows = result.mappings().all()
       jobs = [dict(row) for row in rows]
       if len(rows)!=0 :
-        return jobs
-        
+        return jobs[0]
+      else:
+        return None
 
 
 print(sqlalchemy.__version__)

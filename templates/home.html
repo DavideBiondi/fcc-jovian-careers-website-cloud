@@ -108,21 +108,16 @@ We organized the job items in a row, by using the class row, and we used the cla
 We added a very basic navigation bar, by using the class navbar and the class navbar-light and the class shadow-sm and the class fixed-top and the class bg-white. We also added a logo to the navigation bar, by using the class navbar. navbar-light for use with light background colors. shadow-sm for a small shadow. fixed-top for a fixed position at the top of the page, so that it does not slip away when scrolling the website. bg-white is used to avoid the content of the website overlapping the navigation bar. The container-fluid class is used to make the navigation bar take up the entire width of the screen. Then, to avoid the navbar covering the page title, we introduced a void div with height 56px, which is the height of the navbar.
 
 TODO: Finish to comment the part 1.6 of this tutorial: "Functional and aesthetic improvements"
+
+We replaced the bootstrap import with a local import, by creating a new file called bootstrap.html, and then including it in the head tag of the home.html file. This is a good practice, because it makes the code more modular, and it makes it easier to maintain.
+
+We placed the code and style for the banner.jpg image in another file called banner.html, and then included it in the home.html file. This is a good practice, because it makes the code more modular, and it makes it easier to maintain. We originally put the style tag of the banner within the head tag of the home.html file, but we moved it to the banner.html file, because it is more modular and easier to maintain.
 -->
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <style>
-      #banner {
-        height: 360px;
-        width: 100%;
-        object-fit: cover;
-        margin-bottom: 16px;
-      }
-    </style>
+  {% include 'bootstrap.html' %}
+    {% include 'banner.html' %}
     <title>Jovian Careers</title>
     <!-- <style>
       h1 {
@@ -167,7 +162,7 @@ TODO: Finish to comment the part 1.6 of this tutorial: "Functional and aesthetic
   <body>
     {% include 'nav.html' %}
     <!--<div id="container">-->
-    <img class="img-fluid" id="banner" src="https://4b7dc35b-0000-4c60-a677-32ac7d132a16-00-1wiomotivyk1t.worf.replit.dev/static/banner.jpg">
+    
     <div class="container text-center">
     <h1 class="mt-3 mb-3">{{company_name}} Careers</h1>
     <p>Hello  there, you'll learn about the job openings at Jovian here!</p>

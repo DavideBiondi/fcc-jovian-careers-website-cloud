@@ -46,6 +46,12 @@ The helper function load_jobs_from_db() is used to load the jobs from the databa
 With the line "from database import load_jobs_from_db" is like we are proxy importing text from sqlalchemy and engine from database.py, so we can use them in app.py, because both are used in load_jobs_from_db() function. This is good encapsulation, and good coding practice. All your database-related logic should be in database.py, and all your route-related logic should be in app.py.
 
 We also changed the route /jobs to /api/jobs, so that it is clear that it is a JSON endpoint.
+
+We added a new route /jobs/<id> to return a single job. The <id> is a placeholder for the job id. The job id is a unique identifier for a job. It is a string. It is not an integer. <id> can change dynamically, so it is a placeholder. It is a variable. It is a path parameter. It is a part of the URL/route. In this new route we also added an if statement to check if the job exists. If the job does not exist, we return a 404 error. If the job exists, we return the job. In reality, there are no differences in the aspect of the page, between "return "Not Found", 404" and simply "return "Not Found"".
+
+We also had to add a new helper function load_job_from_db(id) in database.py to load a single job from the database. The function takes an id as an argument and returns a single job. The function uses the text function to execute raw SQL queries. The function uses the engine object to create a connection to the database. The function uses the connection to execute SQL queries.
+
+
 """
 
 """
@@ -91,11 +97,14 @@ def load_jobs_from_db():
         return jobs
 """
 
-@app.route("/jobs/<id>")
+@app.route("/job/<id>")
 def show_job(id):
     job = load_job_from_db(id)
-    return jsonify(job)
+    #return jsonify(job)
     #return jsonify(jobs[int(id)-1])
+    if not job:
+        return "Not Found", 404
+    return render_template('jobpage.html', job=job,                company_name='Jovian')
 
 @app.route("/")
 #The "/" is the root URL. The root URL is the URL of the home page of a website.

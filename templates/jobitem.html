@@ -11,11 +11,13 @@
     </div>  
   </div>
   <div class="col-3 align-self-center">
+    <!--We decided to  redirect the user to the dynamic job         page, instead of an email address, when the user clicks on      the "Apply" button-->
+    <a href="/job/{{job.id}}" type="button" class="btn btn-outline-light btn-success">Apply</a>
     <!-- We replaced X with a Flask templating element
     {{job['title']}} 
-    but the body does NOT work in ThunderBird-->
+    but the body does NOT work in ThunderBird UNTIL YOU SET UP      A COMPLETE TEST ACCOUNT ON THUNDERBIRD-->
     <!-- <a href="mailto:hello@jovian.ai?subject=Job%20Application%20for%20X&body=My%20name" type="button" class="btn btn-outline-light btn-success">Apply</a> -->
-    <a href="mailto:hello@jovian.ai?subject=Job%20Application%20for%20{{job['title']}}&body=My%20name%3A%20%3Cyour%20name%20here%3E%0D%0A%0D%0AMy%20Resume%20link%3A%20%3Cresume%20link%3E%0D%0A%0D%0AMy%20LinkedIn%20link%3A%20%3Clinkedin%20link%3E" type="button" class="btn btn-outline-light btn-success">Apply</a>
+    <!--<a href="mailto:hello@jovian.ai?subject=Job%20Application%20for%20{{job['title']}}&body=My%20name%3A%20%3Cyour%20name%20here%3E%0D%0A%0D%0AMy%20Resume%20link%3A%20%3Cresume%20link%3E%0D%0A%0D%0AMy%20LinkedIn%20link%3A%20%3Clinkedin%20link%3E" type="button" class="btn btn-outline-light btn-success">Apply</a> -->
     <!--<a href="mailto:example@example.com?subject=Job Application for {{job['title']}}" type="button" class="btn btn-outline-light btn-success">Apply</a>-->
   <!--<a href="https://google.com" type="button" class="btn btn-outline-light btn-success">Apply</a>-->
   <!--<button type="button" class="btn btn-outline-light btn-success">Apply</button>-->
