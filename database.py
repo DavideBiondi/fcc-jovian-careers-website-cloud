@@ -76,6 +76,11 @@ method sqlalchemy.engine.Connection.execute(statement: Executable, parameters: _
 parameters: parameters which will be bound into the statement. This may be either a dictionary of parameter names to values, or a mutable sequence (e.g. a list) of dictionaries. When a list of dictionaries is passed, the underlying statement execution will make use of the DBAPI cursor.executemany() method. When a single dictionary is passed, the DBAPI cursor.execute() method will be used.
 
 The benefit of having a database which is separated from the code because the code is deployed (on render) independently from the database, the database can be changed and data just changes independently from the code. So we can have a database which is used by multiple applications, at the same time, and the data is shared between them.
+
+In the function add_application_to_db(job_id,application), we use the text function to execute raw SQL queries. The function uses the engine object to create a connection to the database. The function uses the connection to execute SQL queries.
+conn.execute() requires fundamentally two parameters: the query, and a dictionary of parameters. The query is a string, and the dictionary of parameters is a dictionary of key-value pairs. The keys are the names of the parameters in the query, and the values are the values in the dictionary.
+
+WARNING: The developer in the tutorial use a configuration/version of SQLAlchemy in which autocommit is enabled by default. In the latest version of SQLAlchemy, autocommit is disabled by default. So we need to use the begin() method to start a transaction, and end it as well.
 """
 
 import sqlalchemy
@@ -85,6 +90,13 @@ from sqlalchemy.engine import URL
 from typing import cast
 from urllib.parse import unquote, urlparse
 import pymysql
+
+def add_application_to_db(job_id, application):
+  #with engine.connect() as conn:
+   with engine.begin() as conn:
+    query = text("INSERT INTO applications(job_id, full_name,         email, linkedin_url, education, working_experience,               resume_url) VALUES(:job_id, :full_name, :email,                   :linkedin_url, :education, :working_experience, :resume_url)")
+    
+    conn.execute(query, {"job_id": job_id, "full_name":               application['full_name'], "email": application['email'],          "linkedin_url": application['linkedin_url'], "education":         application['education'], "working_experience":                   application['working_experience'], "resume_url":                  application['resume_url']})
 
 def load_jobs_from_db():
   with engine.connect() as conn:

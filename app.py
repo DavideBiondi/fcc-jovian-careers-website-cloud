@@ -1,7 +1,7 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 #from database import engine
 #from sqlalchemy import text
-from database import load_jobs_from_db, load_job_from_db
+from database import load_jobs_from_db, load_job_from_db, add_application_to_db
 #An App is an object of Flask class. It is our WSGI application. WSGI stands for Web Server Gateway Interface.
 #In any python script, you have this variable __name__ which is a built-in variable.
 """this variable refers to how a particular script was invoked. In this case the script was invoked as the main script. That's why __main__ is the value of __name__ variable."""
@@ -51,7 +51,11 @@ We added a new route /jobs/<id> to return a single job. The <id> is a placeholde
 
 We also had to add a new helper function load_job_from_db(id) in database.py to load a single job from the database. The function takes an id as an argument and returns a single job. The function uses the text function to execute raw SQL queries. The function uses the engine object to create a connection to the database. The function uses the connection to execute SQL queries.
 
+We adden a new route /job/<id>/apply to apply to a job. When we compile a form and submit it, a full address in the browser is generated, with the action as the first part of the address, and the input as the second part of the address, separated by a question mark. We need to parse the address in the route, and extract the input from it. In order to do that, we import request from flask. The request object contains all the data sent from the browser to the server. The request object is a dictionary. The request object contains all the data sent from the browser to the server.
 
+This route is used to apply to a job. When we apply to a job, we send a POST request to the server, by using the option "methods=['post']". The POST request contains all the data sent from the browser to the server. In this way the data is "posted" by the browser instead of being sent to the URL.
+
+We indeed changed "data" from request.args to request.form, because request.args is used to get data from the URL, while request.form is used to get data from the form. The form is obtained with the POST method.
 """
 
 """
@@ -96,6 +100,27 @@ def load_jobs_from_db():
         jobs = [dict(row) for row in rows]
         return jobs
 """
+
+@app.route("/job/<id>/apply", methods=['post'])
+def apply_to_job(id):
+    #data absorbs all the submitted data in the form
+    #from the URL
+    #data = request.args
+
+    data = request.form
+    job=load_job_from_db(id)
+    #This helper function is used to add the application to the       database.
+    add_application_to_db(id, data)
+    #We can:
+    #store the data in the db
+    #send an email to the applicant
+    #display an aknowledgement
+    #here a jsonified version of the data is returned
+    #return jsonify(data)
+    #rendering a webpage with the data
+    return render_template(
+        'application_submitted.html', application=data, job=job)
+    
 
 @app.route("/job/<id>")
 def show_job(id):

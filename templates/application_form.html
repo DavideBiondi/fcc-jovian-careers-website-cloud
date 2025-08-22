@@ -1,0 +1,76 @@
+<!-- A compiled form needs to have an action. In this case we will send the input to the route "/../../apply" creating an apposite route in app.py, which will handle the form submission.
+
+When we compile a form and submit it, a full address in the browser is generated, with the action as the first part of the address, and the input as the second part of the address, separated by a question mark. We need to parse the address in the route, and extract the input from it.
+
+We removed "value" and "name" attribute from the input tags, so that when we jsonify the data from theform, we only obtain the data that the user has inputted, and not the default values of a submit button.
+
+lang attribute does not change the string inside the submit button, so we used <button id="submit" type="submit">Submit Application</button> to change the string inside the submit button directly.
+
+
+If the total URL formed together with the input is too long, the app can slow down. Another way to submit forms is sending data to a new route in the URL. This method is called POST, and it is more secure than GET, because it does not show the data in the URL. That's why in the form tag we added the attribute method="post".
+
+BUT when you submit using the POST method, then you need to process the information using the post method in the app.py file.
+
+The "padding" attribute acts differently if you omit the "px" unit, and use just a number.
+
+For multi-line input, we can use the textarea tag, which is a self-closing tag, and it has a closing tag. It is used to create a multi-line input field. It has a name attribute, and it has a placeholder attribute.
+
+TODO: solve the text area of education and working experience...the box dimension is good but the text is confined in a smaller area.
+-->
+
+<h4>Application Form</h4>
+<style>
+  label {
+
+    width: 350px;       
+    text-align: left;    
+  }
+  #submit{
+    text-align: left;
+    margin-right: 196px;
+  }
+  input::placeholder {
+  /*color: #999;*/
+  /*font-style: italic;*/
+    text-align: left;
+    /*margin-right: 200px;*/
+    /*margin-top: 10px;*/
+    /*padding: 30px;*/
+  }
+</style>
+<!--<form action="/job/{{job.id}}/apply">-->
+<form action="/job/{{job.id}}/apply" method="post">
+
+  <label for="full_name">Full Name</label>
+  <br>
+  <input type="text" name="full_name" placeholder="John Doe" required size="30">
+  <br>
+  <label for="email">Email</label>
+  <br>
+  <input type="email" name="email" placeholder="john.doe@example.com" required size="30">
+  <br>
+  <label for="linkedin_url">LinkedIn URL</label>
+  <br>
+  <input class="mb-2" type="url" name="linkedin_url" placeholder="https://www.linkedin.com/in/johndoe" size="40" style="margin-left: 106px;">
+  <br>
+  <label for="education">Education</label>
+  <br>
+  <!--<input class="mb-2" type="text" name="education"                placeholder="I studied at..."
+    style="margin-left: 106px; padding-right: 195px; padding-bottom: 200px;"> -->
+  <textarea name="education" placeholder="I studied at..." style="margin-left: 100px; padding-right: 230px; padding-bottom: 200px;"></textarea>
+  <br>
+  <label for="working_experience">Working Experience</label>
+  <br>
+  <!--<input class="mb-2" type="text" name="working_experience"       placeholder="I worked as..." 
+    style="margin-left: 106px; padding-right: 195px; padding-bottom: 200px;">-->
+  <textarea name="working_experience" placeholder="I worked as..." style="margin-left: 100px; padding-right: 230px; padding-bottom: 200px;"></textarea>
+  <br>
+  <label for="resume_url">Resume URL</label>
+  <br>
+  <input class="mb-2" type="url" name="resume_url" size="40" style="margin-left: 106px;">
+  <br>
+  <!--<input id = "submit" type="submit" name="submit" value="Submit Application" >-->
+  <!--<input id = "submit" type="submit" lang="en-GB" style="text-align:left; margin-right:196px;">-->
+  <button id="submit" type="submit">Submit Application</button>
+
+</form>

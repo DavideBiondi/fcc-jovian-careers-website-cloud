@@ -26,6 +26,9 @@ The same goes for the requirements section.
 {\% endfor %}" 
 
 TODO: solve the missing rendering of the bootstrap logo in the navbar of the job page.
+
+We placed the footer outside the container,but always within the body tag, so that it is always at the bottom of the page, and it is not affected by the container's width.
+
 -->
 <!DOCTYPE html>
   <html>
@@ -64,7 +67,9 @@ TODO: solve the missing rendering of the bootstrap logo in the navbar of the job
         </ol>
       <h4>Salary</h4>
       <p>{{job.currency}} {{job.salary}}</p>
-      {% include 'footer.html' %}
+        {% include 'application_form.html' %}
+      
     </div>
+      {% include 'footer.html' %}
     </body>
   </html>
