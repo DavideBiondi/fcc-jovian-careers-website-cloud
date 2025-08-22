@@ -11,7 +11,7 @@ li tags stand for list item tags, and they are used to create a list of items, w
 
 we used the class="list-centered" to center the list, and we used the "style=list-style-position: inside;" to center the bullets, and "padding-left: 0;" to remove the default padding so that the bullets are centered.
 
-TODO: Complete the responsibilities and requirements sections of the job page, by using the data from the database. 
+We Completed the responsibilities and requirements sections of the job page, by using the data from the database. 
 Implement (you only need one escape backslash, always inside the curly brackets, preferrably just after the left one): 
 
 "{\% for line in job.responsibilities.split("\n") %}
@@ -50,13 +50,17 @@ TODO: solve the missing rendering of the bootstrap logo in the navbar of the job
         <ul class="list-centered" 
           style="list-style-position: inside;
           padding-left: 0;">
-          <li>Item A</li>
-          <li>Item B</li>
-          <li>Item C</li>
+          {% for line in job.responsibilities.split("\n") %}
+            <li>{{line}}</li>
+          {% endfor %}
         </ul>
         <h4>Requirements</h4>
-        <ol>
-          
+        <ol class="list-centered" 
+          style="list-style-position: inside;
+          padding-left: 0;">
+          {% for line in job.requirements.split("\n") %}
+            <li>{{line}}</li>
+          {% endfor %}
         </ol>
       <h4>Salary</h4>
       <p>{{job.currency}} {{job.salary}}</p>
