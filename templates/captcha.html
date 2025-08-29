@@ -1,4 +1,4 @@
-
+<!-- These head and script and body are not necessary here, because they are already in the application_form.html file.
   <head>
     <title>hCAPTCHA Demo</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -6,17 +6,16 @@
 
     <script src="https://js.hcaptcha.com/1/api.js?reportapi=https%3A%2F%2Faccounts.hcaptcha.com&custom=False&pstissuer=https://pst-issuer.hcaptcha.com" type="text/javascript" async defer></script>
       </head>
-  <body>
+We also removed form tags and fieldset tags, because they are already in the application_form.html file, html does not support nested forms. 
+We changed the id from hcaptcha-demo to just hcaptcha.
+   <body> -->
 
-    <div class="sample-form">
-      <form id="hcaptcha-demo-form" method="POST">
-        <fieldset>
               <div class="">
                 <!-- BEGIN: hCaptcha implementation example. -->
                 <div
-                  id="hcaptcha-demo"
+                  id="hcaptcha"
                   class="h-captcha"
-                  data-sitekey="9f3e60de-5542-4d70-9842-aabce610bcbc"
+                  data-sitekey="{{ SITE_KEY_HCAPTCHA }}"
                   data-callback="onSuccess"
                   data-expired-callback="onExpire"
 
@@ -45,10 +44,7 @@
                 </script>
                 <!-- END: hCaptcha implementation example. -->
               </div>
-        </fieldset>
-      </form>
 
       <div class="hcaptcha-success smsg" aria-live="polite"></div>
-    </div>
 
-  </body>
+  <!--</body> -->

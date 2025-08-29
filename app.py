@@ -1,11 +1,23 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, flash
+from flask_hcaptcha import hCaptcha
+import os
 #from database import engine
 #from sqlalchemy import text
 from database import load_jobs_from_db, load_job_from_db, add_application_to_db
 #An App is an object of Flask class. It is our WSGI application. WSGI stands for Web Server Gateway Interface.
 #In any python script, you have this variable __name__ which is a built-in variable.
 """this variable refers to how a particular script was invoked. In this case the script was invoked as the main script. That's why __main__ is the value of __name__ variable."""
+
 app = Flask(__name__)
+hcaptcha = hCaptcha(app)
+SECRET_HCAPTCHA = os.environ['SECRET_HCAPTCHA']
+SITE_KEY_HCAPTCHA = os.environ['SITE_KEY_HCAPTCHA']
+app.config.update({
+    "debug": True,
+    "HCAPTCHA_SITE_KEY": "SITE_KEY_HCAPTCHA",
+    "HCAPTCHA_SITE_SECRET": "SECRET_HCAPTCHA",
+    "HCAPTCHA_ENABLED": True
+})
 
 """The route() function of the Flask class is a decorator, which tells the application which URL should call the associated function. In this case, the URL of the given function (hello_world) is '/'.
 We tell Flask when a certain URL is requested, the function is called and the return value of the function is sent to the browser as a response. In this case we registering a route, which is simply a part of the URL after the domain name. For example, if you go to www.example.com/hello, the path of the route is /hello.
@@ -56,6 +68,10 @@ We adden a new route /job/<id>/apply to apply to a job. When we compile a form a
 This route is used to apply to a job. When we apply to a job, we send a POST request to the server, by using the option "methods=['post']". The POST request contains all the data sent from the browser to the server. In this way the data is "posted" by the browser instead of being sent to the URL.
 
 We indeed changed "data" from request.args to request.form, because request.args is used to get data from the URL, while request.form is used to get data from the form. The form is obtained with the POST method.
+
+We updated SITE_KEY_HCAPTCHA with the universal value 10000000-ffff-ffff-ffff-000000000001 that fits fine for replit because replit is just for development purposes, and we do not need to use the real site key, because the domain changes every time we restart the replit server. So we can use the universal value.
+
+TODO: comment all the operations related to the implementation of the captcha, and the related imports.
 """
 
 """
@@ -106,9 +122,14 @@ def apply_to_job(id):
     #data absorbs all the submitted data in the form
     #from the URL
     #data = request.args
-
-    data = request.form
     job=load_job_from_db(id)
+    if not hcaptcha.verify():
+        flash("Captcha non valido, riprova.")
+        render_template(
+            'jobpage.html', job=job)
+    
+    data = request.form
+    #job=load_job_from_db(id)
     #This helper function is used to add the application to the       database.
     add_application_to_db(id, data)
     #We can:
@@ -129,7 +150,7 @@ def show_job(id):
     #return jsonify(jobs[int(id)-1])
     if not job:
         return "Not Found", 404
-    return render_template('jobpage.html', job=job,                company_name='Jovian')
+    return render_template('jobpage.html', job=job,                company_name='Jovian', SITE_KEY_HCAPTCHA=SITE_KEY_HCAPTCHA)
 
 @app.route("/")
 #The "/" is the root URL. The root URL is the URL of the home page of a website.

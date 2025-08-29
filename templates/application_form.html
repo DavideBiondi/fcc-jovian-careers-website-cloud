@@ -16,9 +16,19 @@ The "padding" attribute acts differently if you omit the "px" unit, and use just
 For multi-line input, we can use the textarea tag, which is a self-closing tag, and it has a closing tag. It is used to create a multi-line input field. It has a name attribute, and it has a placeholder attribute.
 
 TODO: solve the text area of education and working experience...the box dimension is good but the text is confined in a smaller area.
+
+We added a captcha to the form, to prevent bots from submitting the form. We used the hcaptcha library, and we included the script under the h4 tag of the application_form.html file.
+
+The script address https://js.hcaptcha.com/1/api.js?reportapi=https%3A%2F%2Faccounts.hcaptcha.com&custom=False&pstissuer=https://pst-issuer.hcaptcha.com can be simplified in 
+https://js.hcaptcha.com/1/api.js
+
+We also abolished the submit button related to the captcha, because with two submit buttons, the form gets submitted twice.
+
+for="hcaptcha" is useless in the label tag, because the widget hCaptcha is not an input field, it is a div.
 -->
 
 <h4>Application Form</h4>
+<script src="https://js.hcaptcha.com/1/api.js" type="text/javascript" async defer></script>
 <style>
   label {
 
@@ -71,10 +81,10 @@ TODO: solve the text area of education and working experience...the box dimensio
   <br>
   <!--<input id = "submit" type="submit" name="submit" value="Submit Application" >-->
   <!--<input id = "submit" type="submit" lang="en-GB" style="text-align:left; margin-right:196px;">-->
-  <label for="captcha">Complete the captcha</label>
+  <label>Complete the captcha</label>
   <br>
   {% include 'captcha.html' %}
-  <input id="hcaptcha-demo-submit" type="submit" value="Submit">
+  <!--<input id="hcaptcha-demo-submit" type="submit" value="Submit">-->
   <br>
   <br>
 
