@@ -1,0 +1,54 @@
+
+  <head>
+    <title>hCAPTCHA Demo</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=yes">
+
+    <script src="https://js.hcaptcha.com/1/api.js?reportapi=https%3A%2F%2Faccounts.hcaptcha.com&custom=False&pstissuer=https://pst-issuer.hcaptcha.com" type="text/javascript" async defer></script>
+      </head>
+  <body>
+
+    <div class="sample-form">
+      <form id="hcaptcha-demo-form" method="POST">
+        <fieldset>
+              <div class="">
+                <!-- BEGIN: hCaptcha implementation example. -->
+                <div
+                  id="hcaptcha-demo"
+                  class="h-captcha"
+                  data-sitekey="9f3e60de-5542-4d70-9842-aabce610bcbc"
+                  data-callback="onSuccess"
+                  data-expired-callback="onExpire"
+
+                  >
+                </div>
+                <script>
+                      // success callback
+                      var onSuccess = function(response) {
+                        var errorDivs = document.getElementsByClassName("hcaptcha-error");
+                        if (errorDivs.length) {
+                          errorDivs[0].className = "";
+                        }
+                        var errorMsgs = document.getElementsByClassName("hcaptcha-error-message");
+                        if (errorMsgs.length) {
+                          errorMsgs[0].parentNode.removeChild(errorMsgs[0]);
+                        }
+
+                        var logEl = document.querySelector(".hcaptcha-success");
+                        logEl.innerHTML = "Challenge Success!"
+                      };
+
+                      var onExpire = function(response) {
+                        var logEl = document.querySelector(".hcaptcha-success");
+                        logEl.innerHTML = "Token expired."
+                      };
+                </script>
+                <!-- END: hCaptcha implementation example. -->
+              </div>
+        </fieldset>
+      </form>
+
+      <div class="hcaptcha-success smsg" aria-live="polite"></div>
+    </div>
+
+  </body>

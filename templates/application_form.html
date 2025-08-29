@@ -71,6 +71,13 @@ TODO: solve the text area of education and working experience...the box dimensio
   <br>
   <!--<input id = "submit" type="submit" name="submit" value="Submit Application" >-->
   <!--<input id = "submit" type="submit" lang="en-GB" style="text-align:left; margin-right:196px;">-->
-  <button id="submit" type="submit">Submit Application</button>
+  <label for="captcha">Complete the captcha</label>
+  <br>
+  {% include 'captcha.html' %}
+  <input id="hcaptcha-demo-submit" type="submit" value="Submit">
+  <br>
+  <br>
 
+  <button id="submit" type="submit">Submit Application</button>
+  
 </form>
