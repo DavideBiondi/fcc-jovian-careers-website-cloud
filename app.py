@@ -72,6 +72,10 @@ We indeed changed "data" from request.args to request.form, because request.args
 We updated SITE_KEY_HCAPTCHA with the universal value 10000000-ffff-ffff-ffff-000000000001 that fits fine for replit because replit is just for development purposes, and we do not need to use the real site key, because the domain changes every time we restart the replit server. So we can use the universal value.
 
 TODO: comment all the operations related to the implementation of the captcha, and the related imports.
+
+We added a new route /registration_form to return the registration form. The registration form is a HTML file. The registration form is used to register a new user. In this way a user can monitor his own applications.
+
+TODO: test the registration form and its password and email validation, wirte its logic in the database.py file, and add the logic to the route /registration_form.
 """
 
 """
@@ -116,6 +120,9 @@ def load_jobs_from_db():
         jobs = [dict(row) for row in rows]
         return jobs
 """
+@app.route("/registration_form")
+def registration_form():
+    return render_template('registration_form.html', SITE_KEY_HCAPTCHA=SITE_KEY_HCAPTCHA)
 
 @app.route("/job/<id>/apply", methods=['post'])
 def apply_to_job(id):

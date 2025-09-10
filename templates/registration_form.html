@@ -1,0 +1,31 @@
+<!--
+Inside the input tag of the password field, we added the pattern attribute, which is used to validate the input. The pattern attribute is a regular expression, which is a sequence of characters that forms a search pattern. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+</head>
+<body>
+    <!-- Body content goes here -->
+    <!-- Form -->
+    <div class="box-outer">
+        <form name="signup_form" method="post" action="" autocomplete="off">
+            <h2 class="heading">Sign Up Form</h2>
+
+
+            <label>Email</label>
+            <input type="text" name="email" class="input-control" placeholder="Your email address" required>
+            <br>
+            <label>New Password</label>
+            <input type="password" name="password" class="input-control" pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.\-_*])([a-zA-Z0-9@#$%^&+=*.\-_]){8,12}$" required>
+            <br>
+            <input type="submit" name="submit" class="button" value="Signup">
+        </form>
+        <hr>
+        <div>By clicking Sign Up, you are indicating that you have read and agree to the <a href="#" target="_blank"><u>Terms of Use</u></a> and <a href="#" target="_blank"><u>Privacy Policy</u></a>.</div>
+    </div>
+    <!-- Form End -->
+</body>
+</html>
