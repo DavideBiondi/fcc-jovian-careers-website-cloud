@@ -18,3 +18,4 @@ gunicorn
 sqlalchemy
 pymysql
 flask_hcaptcha
+python-dotenv
