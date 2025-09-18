@@ -33,12 +33,14 @@ We placed the footer outside the container,but always within the body tag, so th
 <!DOCTYPE html>
   <html>
     <head>
-      <title>{{job.title}} - Jovian Careers</title>
-      {% include 'bootstrap.html' %}
-    </head>
-    <body>
       {% include 'nav.html' %}
       {% include 'banner.html' %}
+      <title>{{job.title}} - Jovian Careers</title>
+      {% include 'bootstrap.html' %}
+      
+    </head>
+    <body>
+
       <div class="container text-center">
         <h1 class="mt-3 mb-3">{{company_name}} Careers</h1>
       <!--<h3>Title</h3>-->

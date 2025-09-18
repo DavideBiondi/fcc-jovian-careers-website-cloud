@@ -1,11 +1,17 @@
 <!--
 We changed the hyperlink of the navbar from "#" to "/", so that it redirects to the home page, instead of nowhere.
+When inserting static elements in a website using flask framework, the best practice is to use
+Flask syntax, such as this:
+{\{ url_for('static', filename='bootstrap-logo.svg') }}
 -->
 <nav class="navbar navbar-light  
   shadow-sm fixed-top bg-white">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
-      <img src="static/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
+      <!--<img src="static/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">-->
+      <img src="{{ url_for('static', filename='bootstrap-logo.svg') }}
+      " alt="" width="30" height="24" class="d-inline-block align-text-top">
+      
       Jovian
     </a>
   </div>

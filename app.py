@@ -1,6 +1,10 @@
 from flask import Flask, render_template, jsonify, request, flash
 from flask_hcaptcha import hCaptcha
 import os
+#in order to load secrets locally we need a loader
+from dotenv import load_dotenv
+#it is important to put the environment file between double quotes
+load_dotenv("secrets.env")
 #from database import engine
 #from sqlalchemy import text
 from database import load_jobs_from_db, load_job_from_db, add_application_to_db
